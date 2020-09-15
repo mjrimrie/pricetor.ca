@@ -2,9 +2,12 @@ package listing
 
 import (
 	"encoding/json"
+	"github.com/mjrimrie/priceator/internal/datalayer"
+	"github.com/mjrimrie/priceator/internal/resources/realtor"
 	"net/http"
-	"resources/realtor"
 )
+
+logger, _ := zap.NewProduction()
 
 type listingParams struct {
 	listingId string
@@ -45,7 +48,16 @@ func AddListingToWatch(w http.ResponseWriter, req *http.Request){
 	if req.Method != "POST" {
 		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
 	}
-
-
-
+	db, err := datalayer.Connect()
+	if err != nil{
+		log)
+	}
 }
+
+defer logger.Sync()
+logger.Info("failed to fetch URL",
+// Structured context as strongly typed Field values.
+zap.String("url", url),
+zap.Int("attempt", 3),
+zap.Duration("backoff", time.Second),
+)
